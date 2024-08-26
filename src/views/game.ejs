@@ -1,0 +1,28 @@
+<%- include("./partials/head") %>
+
+<body>
+    <%- include("./partials/header") %>
+
+    <main>
+        <h2><%= title %></h2>
+        <!-- Popup de feedback logo abaixo do título -->
+        <div id="feedback">Acertou!</div>
+        <div id="game-board">
+            <% cards.forEach(card => { %>
+                <div class="card" data-word="<%= card.word %>" data-isimage="<%= card.isImage %>">
+                    <div class="front"></div> <!-- Frente da carta (inicialmente visível e em branco) -->
+                    <div class="back">
+                        <% if (card.isImage) { %>
+                            <img src="<%= card.imageUrl %>" alt="<%= card.word %>">
+                        <% } else { %>
+                            <p><%= card.word %></p>
+                        <% } %>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </main>
+
+    <script src="../js/game.js"></script>
+</body>
+</html>

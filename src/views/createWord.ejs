@@ -1,0 +1,38 @@
+<%- include("./partials/head") %>
+
+<body>
+    <%- include("./partials/header") %>
+
+    <main class="page-create">
+        <h2><%= title %></h2>
+        <form id="word-form" action="/createWord" method="POST">
+            <div id="word-inputs">
+                <div class="input-group">
+                    <input type="text" name="word[]" placeholder="Palavra em Inglês">
+                    <input type="text" name="imageUrl[]" placeholder="URL da Imagem">
+                </div>
+            </div>
+            <button type="button" id="add-word">Adicionar Mais</button>
+            <br><br>
+            <button type="submit" class="btn btn-primary">Criar</button>
+        </form>
+    </main>
+
+
+    <script>
+        // JavaScript para adicionar mais campos dinamicamente
+        document.getElementById('add-word').addEventListener('click', () => {
+            const wordInputs = document.getElementById('word-inputs');
+            const newInputGroup = document.createElement('div');
+            newInputGroup.classList.add('input-group');
+
+            newInputGroup.innerHTML = `
+                <input type="text" name="word[]" placeholder="Palavra em Inglês">
+                <input type="text" name="imageUrl[]" placeholder="URL da Imagem">
+            `;
+
+            wordInputs.appendChild(newInputGroup);
+        });
+    </script>
+</body>
+</html>

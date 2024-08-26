@@ -1,0 +1,45 @@
+<%- include("./partials/head") %>
+
+<body>
+    <%- include("./partials/header") %>
+
+    <main>
+        <h2><%= title %></h2>
+        <p>Pergunta <%= currentWordIndex + 1 %> de 15</p>
+        <div id="spelling-game">
+            <% if (showSpeakBtn && showWriteInput) { %>
+                <h3>Clique no botão para ouvir a palavra e depois digite-a:</h3>
+                <button id="speak-btn">Ouvir Palavra</button>
+            <% } else if (showSpeakBtn && showSpeakAnswerBtn) { %>
+                <h3>Ouça a palavra e depois fale-a:</h3>
+                <button id="speak-btn">Ouvir Palavra</button>
+            <% } else if (showSpeakAnswerBtn && !showSpeakBtn) { %>
+                <h3>Fale a palavra que corresponde ao texto:</h3>
+                <p><%= words[currentWordIndex].word %></p>
+            <% } %>
+            <form action="/spellingAudio/check" method="POST">
+                <input type="hidden" name="word" value="<%= words[currentWordIndex].word %>">
+                <input type="hidden" name="currentWordIndex" value="<%= currentWordIndex %>">
+                <input type="hidden" name="correctAnswers" value="<%= correctAnswers %>">
+                <% if (showWriteInput) { %>
+                    <input type="text" name="answer" placeholder="Digite aqui" id="answer-input">
+                <% } else { %>
+                    <input type="hidden" name="answer" id="answer-input">
+                    <input type="text" id="spoken-word-display" readonly placeholder="Palavra falada aparecerá aqui">
+                <% } %>
+                <button type="submit">Verificar</button>
+            </form>
+            <% if (showSpeakAnswerBtn) { %>
+                <button id="speak-answer-btn">Falar Resposta</button>
+            <% } %>
+            <div id="result">
+                <% if (typeof feedback !== 'undefined') { %>
+                    <p class="<%= feedback === 'Correto!' ? 'correct' : 'incorrect' %>"><%= feedback %></p>
+                <% } %>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/spellingAudio.js"></script>
+</body>
+</html>
