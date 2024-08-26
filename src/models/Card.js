@@ -1,28 +1,32 @@
-const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = new Sequelize({
-  dialect: 'sqlite',
-  storage: './database.sqlite'
-});
+const db = require("../config/sequelize");
+const Sequelize = require("sequelize");
 
-// Definindo um modelo exemplo para a tabela cards
-const Card = sequelize.define('Card', {
+const Card = db.define("Card", {
   word: {
-    type: DataTypes.STRING,
+    type: Sequelize.DataTypes.STRING,
     allowNull: false
   },
   translation: {
-    type: DataTypes.STRING,
+    type: Sequelize.DataTypes.STRING,
     allowNull: false
   },
-  image_url: {
-    type: DataTypes.STRING,
+  imageUrl: {
+    type: Sequelize.DataTypes.STRING,
     allowNull: false
-  }
+  },
+  created_at: {
+    type: Sequelize.DataTypes.DATE,
+    defaultValue: Sequelize.NOW,
+  },
+  updated_at: {
+    type: Sequelize.DataTypes.DATE,
+    defaultValue: Sequelize.NOW,
+    onUpdate: Sequelize.NOW,
+  },
 }, {
-  timestamps: true,
-  underscored: true
+  tableName: "cards",
+  timestamps: false,
 });
 
-sequelize.sync().then(() => {
-  console.log('Banco de dados sincronizado');
-});
+
+module.exports = Card;

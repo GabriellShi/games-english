@@ -1,10 +1,14 @@
-CREATE TABLE IF NOT EXISTS cards (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    word TEXT NOT NULL,
-    translation TEXT NOT NULL,
-    image_url TEXT NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+CREATE DATABASE match_game_db;
+
+USE match_game_db;
+
+CREATE TABLE cards (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    word VARCHAR(255) NOT NULL,
+    translation VARCHAR(255) NOT NULL,
+    image_url VARCHAR(255) NOT NULL,
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 INSERT INTO cards (word, translation, image_url) VALUES 
@@ -13,6 +17,9 @@ INSERT INTO cards (word, translation, image_url) VALUES
 ('house', 'casa', 'https://img.freepik.com/vetores-gratis/bela-casa_24877-50819.jpg'),
 ('tree', 'árvore', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRo3pFV5kAjx4aLvs21GqMxxCIhvoRohuJPdw&s');
 
+
 SELECT * FROM cards;
 
-DROP TABLE IF EXISTS cards;
+
+DROP TABLE cards;
+// -------------- 

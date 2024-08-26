@@ -241,8 +241,6 @@ header nav a:hover {
     }
 }
 
-
-
 /* Estilos para a página de criação de palavras */
 main {
     max-width: 500px;
@@ -304,10 +302,7 @@ form input[type="text"]:focus {
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
 }
 
-
-
 /* ------------------  */
-
 .input-group {
     display: flex;
     gap: 10px;
@@ -338,4 +333,145 @@ form input[type="text"]:focus {
 
 .btn-primary:hover {
     background-color: #0056b3;
+}
+
+/* Estilos Responsivos */
+
+/* Estilos para telas pequenas, como smartphones */
+@media (max-width: 600px) {
+    .page-sucesso {
+        text-align: center;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    .btn {
+        display: block;
+        width: 100%;
+        margin: 10px 0;
+        padding: 15px;
+        font-size: 1em;
+    }
+
+    #spelling-game {
+        margin-top: 20px;
+    }
+
+    #spelling-game form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #spelling-game input[type="text"], #spelling-game input[type="hidden"] {
+        width: 90%;
+        padding: 10px;
+        margin-bottom: 10px;
+        font-size: 1em;
+    }
+
+    #speak-btn, #speak-answer-btn {
+        width: 90%;
+        padding: 15px;
+        font-size: 1em;
+        margin-bottom: 10px;
+    }
+
+    button {
+        width: 90%;
+        padding: 15px;
+        font-size: 1em;
+    }
+
+    #result {
+        margin-top: 20px;
+        font-size: 1.2em;
+    }
+}
+
+/* Estilos para tablets */
+@media (min-width: 601px) and (max-width: 1024px) {
+    h2 {
+        font-size: 1.75em;
+    }
+
+    .btn {
+        font-size: 1.1em;
+    }
+
+    #spelling-game {
+        margin-top: 30px;
+    }
+
+    #spelling-game form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #spelling-game input[type="text"], #spelling-game input[type="hidden"] {
+        width: 80%;
+        padding: 12px;
+        margin-bottom: 15px;
+        font-size: 1.1em;
+    }
+
+    #speak-btn, #speak-answer-btn {
+        width: 80%;
+        padding: 15px;
+        font-size: 1.1em;
+        margin-bottom: 15px;
+    }
+
+    button {
+        width: 80%;
+        padding: 15px;
+        font-size: 1.1em;
+    }
+
+    #result {
+        margin-top: 25px;
+        font-size: 1.4em;
+    }
+}
+
+/* Estilos para telas maiores (Desktop) */
+@media (min-width: 1025px) {
+    #spelling-game {
+        margin-top: 40px;
+    }
+
+    #spelling-game form {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #spelling-game input[type="text"], #spelling-game input[type="hidden"] {
+        width: 60%;
+        padding: 15px;
+        margin-bottom: 20px;
+        font-size: 1.2em;
+    }
+
+    #speak-btn, #speak-answer-btn {
+        width: 60%;
+        padding: 15px;
+        font-size: 1.2em;
+        margin-bottom: 20px;
+    }
+
+    button {
+        width: 60%;
+        padding: 15px;
+        font-size: 1.2em;
+    }
+
+    #result {
+        margin-top: 30px;
+        font-size: 1.6em;
+    }
 }
