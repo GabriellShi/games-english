@@ -5,10 +5,15 @@ const spellingAudioController = {
   index: async (req, res) => {
     try {
       // Busca 15 palavras aleatórias do banco de dados
-      const words = await Card.findAll({
+      let words = await Card.findAll({
         order: Sequelize.literal('RAND()'),
         limit: 15
       });
+
+      // Verifica se há palavras suficientes
+      if (words.length < 15) {
+        return res.status(500).send('Erro: Não há palavras suficientes no banco de dados.');
+      }
 
       req.session.words = words;
 
@@ -89,4 +94,3 @@ const spellingAudioController = {
 };
 
 module.exports = spellingAudioController;
-// -------------- 

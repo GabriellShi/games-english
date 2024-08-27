@@ -1,28 +1,27 @@
 const Card = require('../models/Card');
+const Sequelize = require('sequelize');
 
 const spellingController = {
   index: async (req, res) => {
     try {
-      // Se as perguntas ainda não estiverem definidas na sessão, defina-as
       if (!req.session.questions) {
-        const cards = await Card.findAll();
+        const cards = await Card.findAll({
+          order: Sequelize.literal('RAND()'),
+          limit: 10  // Seleciona até 10 itens aleatórios
+        });
 
-        const words = cards.filter(card => card.word);
-        const images = cards.filter(card => card.imageUrl);
+        if (cards.length < 10) {
+          return res.status(500).send('Erro: Não há cartas suficientes no banco de dados.');
+        }
 
-        const selectedWords = words.sort(() => 0.5 - Math.random()).slice(0, 5);
-        const selectedImages = images.sort(() => 0.5 - Math.random()).slice(0, 5);
-
-        const questions = [...selectedWords, ...selectedImages].sort(() => 0.5 - Math.random());
+        const questions = cards.sort(() => 0.5 - Math.random());
 
         req.session.questions = questions;
         req.session.currentQuestion = 0;
       }
 
-      // Pega a pergunta atual
       const currentCard = req.session.questions[req.session.currentQuestion];
 
-      // Renderiza a página do jogo com a pergunta atual
       res.render('spelling', {
         title: 'Jogo de Ditado - Match Game',
         card: currentCard,
@@ -63,14 +62,11 @@ const spellingController = {
       if (correct) {
         req.session.currentQuestion += 1;
         if (req.session.currentQuestion < req.session.questions.length) {
-          // Redireciona para a próxima pergunta
           return res.redirect('/spelling');
         } else {
-          // Redireciona para a página de sucesso
           return res.redirect('/pageSucesso');
         }
       } else {
-        // Renderiza a mesma pergunta com um feedback de erro
         return res.render('spelling', {
           title: 'Jogo de Ditado - Match Game',
           card: currentCard,

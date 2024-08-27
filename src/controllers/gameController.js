@@ -10,14 +10,16 @@ const gameController = {
                 limit: 4
             });
 
-            // Para cada carta, cria dois objetos: um para a imagem e outro para a palavra em inglês, garantindo que fiquem como pares inseparáveis
+            // Verifica se há cartas suficientes
+            if (cards.length < 4) {
+                return res.status(500).send('Erro: Não há cartas suficientes no banco de dados.');
+            }
+
+            // Embaralha as cartas para evitar que as mesmas cartas apareçam sempre na mesma ordem
             const gameCards = cards.flatMap(card => ([
                 { ...card.dataValues, isImage: true },  // Carta de imagem
                 { ...card.dataValues, isImage: false }  // Carta de palavra
-            ]));
-
-            // Embaralha as cartas
-            gameCards.sort(() => 0.5 - Math.random());
+            ])).sort(() => 0.5 - Math.random());
 
             res.render('game', {
                 title: 'Jogo de Associação - Match Game',

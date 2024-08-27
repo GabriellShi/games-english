@@ -451,10 +451,10 @@ form input[type="text"]:focus {
     }
 
     #spelling-game input[type="text"], #spelling-game input[type="hidden"] {
-        width: 60%;
-        padding: 15px;
+        width: 100%;
+        margin-top: 20px;
         margin-bottom: 20px;
-        font-size: 1.2em;
+        margin-right: 10px;
     }
 
     #speak-btn, #speak-answer-btn {
@@ -473,5 +473,105 @@ form input[type="text"]:focus {
     #result {
         margin-top: 30px;
         font-size: 1.6em;
+    }
+}
+
+
+@media (max-width: 378px) {
+    
+    main {
+        margin: 0;
+    }
+
+    main h2{
+      margin-top: 0; 
+      font-size: 20px; 
+    }
+
+    .card{
+        width: 80px;
+        height: 120px;
+    }
+
+    #spelling-game h3{
+        font-size: 16px;
+    }
+
+    p {
+        font-size: 12px;
+    }
+
+
+
+    #spelling-game input[type="text"], #spelling-game input[type="hidden"] {
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    .button  {
+        width: 100% !important;
+    }
+
+    #speak-btn{
+        width: 100%;
+    }     
+
+
+
+
+    /* -------------- Header */
+
+    header h1{
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+
+    header nav a{
+        font-size: 14px;
+        border-radius: 10px;
+        background-color: #0056b3;
+        padding: 6px;
+        cursor: pointer;
+        margin-top: 0.7rem;
+        margin-bottom: 0.7rem;
+    }
+
+    header nav{
+
+        margin-top: 0.7rem;
+        margin-bottom: 0.7rem;
+    }
+
+    .nav2 {
+        font-size: 14px;
+        font-family: Arial, Helvetica, sans-serif;
+        margin-right: 5px;
+        cursor: pointer;
+        margin-top: 0.7rem;
+        margin-bottom: 0.7rem;
+    }
+
+    .nav2 a {
+        border-radius: 10px;
+        background-color: #0056b3;
+        padding: 6px;
+        cursor: pointer;
+    }
+
+
+    /* -------------  */
+
+
+    .page-sucesso .btn {
+        padding: 10PX;
+    }
+
+    .btn {
+        width: 80%;
+    }
+
+    #spelling-game button {
+        margin-bottom: 15px;
     }
 }

@@ -9,7 +9,7 @@
         <div id="spelling-game">
             <% if (card.imageUrl) { %>
                 <h3>Digite a palavra correspondente à imagem:</h3>
-                <img src="<%= card.imageUrl %>" alt="Imagem" style="max-width: 100%; height: auto; width: 400px; display: block; margin: 0 auto;">
+                <img class="img-spelling" src="<%= card.imageUrl %>" alt="Imagem" style="max-width: 100%; height: auto; width: 400px; display: block; margin: 0 auto;">
                 <form id="spellingForm" action="/spelling/check" method="POST">
                     <input type="hidden" name="expectedWord" value="<%= card.word.trim().toLowerCase() %>"> <!-- Palavra em inglês para a imagem -->
                     <input type="text" name="userAnswer" placeholder="Digite aqui" required>
