@@ -1,24 +1,47 @@
+
+
+
+
+<%- include("./partials/headAntigo") %>
+
 <%- include("./partials/head") %>
-
+<!-- ---------------------------  -->
 <body>
-    <%- include("./partials/header") %>
 
-    <main class="page-create">
-        <h2><%= title %></h2>
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+    <%- include("./partials/headerLado") %>
+
+
+        <!-- Layout container -->
+        <div class="layout-page">
+            <!-- Navbar -->
+  
+    <%- include("./partials/headerCima") %>
+
+          <!-- / Navbar -->
+
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
+            <!-- Content -->
+
+            <div class="container-xxl flex-grow-1 container-p-y">
+       
+    <main style="background-color: #312d4b; margin: 0;">
+        <h4><%= title %></h4>
         <form id="word-form" action="/createWord" method="POST">
             <div id="word-inputs">
                 <div class="input-group">
-                    <input type="text" name="word[]" placeholder="Palavra em Inglês">
-                    <input type="text" name="imageUrl[]" placeholder="URL da Imagem">
+                    <input type="text" name="word[]" placeholder="Palavra em Inglês" style="background-color: transparent;">
+                    <input type="text" name="imageUrl[]" placeholder="URL da Imagem" style="background-color: transparent;">
+                    
                 </div>
             </div>
             <button type="button" id="add-word">Adicionar Mais</button>
             <br><br>
-            <button type="submit" class="btn btn-primary">Criar</button>
+            <button type="submit" class="btn btn-primary" style="background-color: blueviolet; border: 0;">Criar</button>
         </form>
     </main>
-
-
     <script>
         // JavaScript para adicionar mais campos dinamicamente
         document.getElementById('add-word').addEventListener('click', () => {
@@ -27,12 +50,41 @@
             newInputGroup.classList.add('input-group');
 
             newInputGroup.innerHTML = `
-                <input type="text" name="word[]" placeholder="Palavra em Inglês">
-                <input type="text" name="imageUrl[]" placeholder="URL da Imagem">
+            ----------------------------------
+                <input type="text" name="word[]" placeholder="Palavra em Inglês" style="background-color: transparent;">
+                <input type="text" name="imageUrl[]" placeholder="URL da Imagem" style="background-color: transparent;">
             `;
 
             wordInputs.appendChild(newInputGroup);
         });
     </script>
-</body>
+
+
+
+            </div>
+
+            <a style="border: 0; background-color: rgb(23, 0, 137); color: white; padding: 0.7rem; text-align: center; width: 50%; 
+border-radius: 10px; margin-left:  auto; margin-right: auto;" href="/wordList">Word List</a>
+
+            <!-- / Content -->
+
+
+            <div class="content-backdrop fade"></div>
+          </div>
+          <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+      </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+
+      <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+      <div class="drag-target"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+    <%- include("./partials/linkFooter") %>
+
+  </body>
 </html>

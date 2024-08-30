@@ -14,4 +14,14 @@ router.post('/createWord', indexController.createWord);
 // Rota para a página de sucesso
 router.get('/successWord', indexController.successWord);
 
+router.get('/wordList', indexController.wordList);
+
+// Rota para deletar uma palavra
+router.post('/deleteWord/:id', indexController.deleteWord);
+
+
+
+
+
+
 module.exports = router;

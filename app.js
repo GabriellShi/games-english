@@ -29,11 +29,12 @@ const gameRoutes = require('./src/routes/gameRoutes');
 const spellingRoutes = require('./src/routes/spellingRoutes');
 const indexRoutes = require('./src/routes/indexRoutes'); // Certifique-se que existe
 const spellingAudioRoutes = require('./src/routes/spellingAudioRoutes');
+const calendarRoutes = require('./src/routes/calendarRoutes');
 
 app.use('/', gameRoutes);
 app.use('/', spellingRoutes);
 app.use('/', indexRoutes); // Certifique-se que existe
-app.use('/', spellingAudioRoutes);
+app.use('/', calendarRoutes);
 
 // Iniciar o servidor
 const PORT = process.env.PORT || 4000;

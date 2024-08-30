@@ -1,14 +1,36 @@
+
+
+<%- include("./partials/headAntigo") %>
+
 <%- include("./partials/head") %>
-
+<!-- ---------------------------  -->
 <body>
-    <%- include("./partials/header") %>
 
-    <main>
-        <h2><%= title %></h2>
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+    <%- include("./partials/headerLado") %>
+
+
+        <!-- Layout container -->
+        <div class="layout-page">
+            <!-- Navbar -->
+  
+    <%- include("./partials/headerCima") %>
+
+          <!-- / Navbar -->
+
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
+            <!-- Content -->
+
+            <div class="container-xxl flex-grow-1 container-p-y">
+       
+    <main style="background-color: #312d4b;">
+        <h4><%= title %></h4>
         <p>Pergunta <%= currentWordIndex + 1 %> de 15</p>
         <div id="spelling-game">
             <% if (showSpeakBtn && showWriteInput) { %>
-                <h3>Clique no botão para ouvir a palavra e depois digite-a:</h3>
+                <h6>Clique no botão para ouvir a palavra e depois digite-a:</h6>
                 <button id="speak-btn">Ouvir Palavra</button>
             <% } else if (showSpeakBtn && showSpeakAnswerBtn) { %>
                 <h3>Ouça a palavra e depois fale-a:</h3>
@@ -22,12 +44,23 @@
                 <input type="hidden" name="currentWordIndex" value="<%= currentWordIndex %>">
                 <input type="hidden" name="correctAnswers" value="<%= correctAnswers %>">
                 <% if (showWriteInput) { %>
-                    <input type="text" name="answer" placeholder="Digite aqui" id="answer-input">
+                    <div class="d-flex align-items-center justify-content-between app-academy-md-80" >
+                        <input type="text" name="answer" class="form-control form-control-sm me-4" placeholder="Digite aqui" id="answer-input">
+                        <button type="submit" class="btn btn-primary btn-icon" style="width: 20%; margin-left: auto; margin-right: auto;">
+                          <i class="ri-search-line ri-22px"></i>
+                        </button>
+                      </div>
                 <% } else { %>
-                    <input type="hidden" name="answer" id="answer-input">
-                    <input type="text" id="spoken-word-display" readonly placeholder="Palavra falada aparecerá aqui">
+
+                    <div class="d-flex align-items-center justify-content-between app-academy-md-80" >
+                        <input type="hidden" name="answer" id="answer-input">
+                        <input type="text" id="spoken-word-display" class="form-control form-control-sm me-4" readonly placeholder="Palavra falada aparecerá aqui">
+                        <button type="submit" class="btn btn-primary btn-icon" style="width: 20%; margin-left: auto; margin-right: auto;">
+                          <i class="ri-search-line ri-22px"></i>
+                        </button>
+                      </div>
                 <% } %>
-                <button type="submit">Verificar</button>
+
             </form>
             <% if (showSpeakAnswerBtn) { %>
                 <button id="speak-answer-btn">Falar Resposta</button>
@@ -40,6 +73,51 @@
         </div>
     </main>
 
+    
+    <style>
+        #spelling-game form {
+             display: block; 
+             margin-top: 1rem;
+        }
+
+        #spelling-game button {
+        margin-top: 0;
+        margin-bottom: 7px;
+        width: 50%;
+        height: auto;
+        background-color: blueviolet;
+    }
+    
+    main {
+        margin-top: 0;
+    }
+
+    .container-p-y:not([class^=pt-]):not([class*=" pt-"]) {
+        padding-top: 0rem !important;
+    }
+    
+    </style>
+            </div>
+            <!-- / Content -->
+
+
+            <div class="content-backdrop fade"></div>
+          </div>
+          <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+      </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+
+      <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+      <div class="drag-target"></div>
+    </div>
+    <!-- / Layout wrapper -->
     <script src="../js/spellingAudio.js"></script>
-</body>
+
+    <%- include("./partials/linkFooter") %>
+
+  </body>
 </html>

@@ -18,7 +18,7 @@ const spellingAudioController = {
       req.session.words = words;
 
       res.render('spellingAudio', {
-        title: 'Jogo de Ditado - Spelling Bee com Áudio',
+        title: 'Spelling with Sound',
         words,
         currentWordIndex: 0,
         correctAnswers: 0,
@@ -63,7 +63,7 @@ const spellingAudioController = {
         }
 
         res.render('spellingAudio', {
-          title: 'Jogo de Ditado - Spelling Bee com Áudio',
+          title: 'Spelling with Sound',
           words,
           currentWordIndex: nextWordIndex,
           correctAnswers: updatedCorrectAnswers,
@@ -74,13 +74,13 @@ const spellingAudioController = {
         });
       } else {
         res.render('pageSucesso', {
-          title: 'Sucesso',
+          title: 'Success',
           correctAnswers: updatedCorrectAnswers
         });
       }
     } else {
       res.render('spellingAudio', {
-        title: 'Jogo de Ditado - Spelling Bee com Áudio',
+        title: 'Spelling with Sound',
         words,
         currentWordIndex: parseInt(currentWordIndex),
         correctAnswers: parseInt(correctAnswers),

@@ -58,7 +58,7 @@ const indexController = {
 
             // Passar a contagem para a página de sucesso
             res.render('successWord', {
-                title: 'Palavra Criada',
+                title: 'Word Created',
                 addedCount
             });
         } catch (error) {
@@ -71,7 +71,7 @@ const indexController = {
     try {
       const words = await Card.findAll();
       res.render('listWords', {
-        title: 'Lista de Palavras',
+        title: 'Word List',
         words
       });
     } catch (error) {
@@ -82,16 +82,41 @@ const indexController = {
 
   successWord: (req, res) => {
     res.render('successWord', {
-      title: 'Palavra Criada',
+      title: 'Word Created',
     });
   },
 
     pageSucesso: (req, res) => {
       res.render('pageSucesso', {
-        title: 'Sucesso',
+        title: 'Success',
         correctAnswers: req.query.correctAnswers || 0
       });
+    },
+
+    wordList: async (req, res) => {
+      try {
+        const cards = await Card.findAll(); // Busca todos os registros da tabela "cards"
+        res.render('wordList', {
+          title: 'Word List',
+          cards, // Passa os dados para a visão
+        });
+      } catch (error) {
+        console.error('Erro ao buscar os cards:', error);
+        res.status(500).send('Erro ao buscar os cards');
+      }
+    },
+
+    deleteWord: async (req, res) => {
+      try {
+        const { id } = req.params;
+        await Card.destroy({ where: { id } }); // Deleta o card do banco de dados
+        res.redirect('/wordList'); // Redireciona de volta para a lista de palavras
+      } catch (error) {
+        console.error('Erro ao deletar o card:', error);
+        res.status(500).send('Erro ao deletar o card');
+      }
     }
+    
   };
   
   

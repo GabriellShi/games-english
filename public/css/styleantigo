@@ -1,0 +1,575 @@
+
+body {
+    font-family: Arial, sans-serif;  /* Define a fonte padrão */
+    background-color: #f0f0f0;       /* Cor de fundo padrão */
+    margin: 0;                       /* Remove margens padrão */
+    padding: 0;                      /* Remove preenchimento padrão */
+}
+
+header {
+    background-color: #333;          /* Fundo do cabeçalho */
+    color: #fff;                     /* Cor do texto do cabeçalho */
+    padding: 10px 0;                 /* Espaçamento interno do cabeçalho */
+    text-align: center;              /* Centraliza o texto no cabeçalho */
+}
+
+header h1 {
+    margin: 0;                       /* Remove margem do título */
+    font-size: 24px;                 /* Define o tamanho da fonte do título */
+}
+
+header nav a {
+    color: #fff;                     /* Cor dos links no cabeçalho */
+    margin: 0 15px;                  /* Espaçamento entre os links */
+    text-decoration: none;           /* Remove sublinhado dos links */
+    font-size: 18px;                 /* Define o tamanho da fonte dos links */
+}
+
+header a {
+    color: #fff; 
+    text-decoration: none;                    /* Cor do texto do cabeçalho */
+}
+
+header nav a:hover {
+    text-decoration: underline;      /* Adiciona sublinhado nos links ao passar o mouse */
+}
+
+/* Estilo do tabuleiro do jogo de associação */
+#game-board {
+    display: flex;                   /* Usa flexbox para o layout */
+    flex-wrap: wrap;                 /* Permite que as cartas quebrem para a linha seguinte */
+    justify-content: center;         /* Centraliza o tabuleiro */
+    margin: 20px auto;               /* Margem em torno do tabuleiro */
+    max-width: 600px;                /* Largura máxima do tabuleiro */
+}
+
+.card {
+    position: relative;              /* Define a posição como relativa para uso com o "flip" */
+    background-color: #fff;          /* Cor de fundo das cartas */
+    border: 1px solid #ccc;          /* Borda das cartas */
+    border-radius: 8px;              /* Arredonda os cantos das cartas */
+    margin: 10px;                    /* Espaçamento entre as cartas */
+    width: 120px;                    /* Largura das cartas */
+    height: 160px;                   /* Altura das cartas */
+    cursor: pointer;                 /* Mostra o cursor como uma mão ao passar sobre a carta */
+    transform: rotateY(0deg);        /* Inicialmente, as cartas estão viradas para baixo */
+    transform-style: preserve-3d;    /* Mantém o efeito 3D durante a rotação */
+    transition: transform 0.6s;      /* Transição suave na rotação */
+}
+
+.card.flip {
+    transform: rotateY(180deg);      /* Ao clicar, as cartas viram para revelar o conteúdo */
+}
+
+.card .front, .card .back {
+    position: absolute;              /* Posiciona a frente e o verso dentro da carta */
+    width: 100%;                     /* Faz com que a frente e o verso ocupem toda a carta */
+    height: 100%;                    /* Faz com que a frente e o verso ocupem toda a carta */
+    backface-visibility: hidden;     /* Oculta a face traseira durante a rotação */
+    display: flex;                   /* Usa flexbox para centralizar conteúdo */
+    align-items: center;             /* Alinha o conteúdo verticalmente ao centro */
+    justify-content: center;         /* Alinha o conteúdo horizontalmente ao centro */
+    font-size: 18px;                 /* Define o tamanho da fonte do conteúdo */
+    border-radius: 8px;              /* Arredonda os cantos da carta */
+}
+
+.card .front {
+    background-color: #f0f0f0;       /* Cor da frente da carta (inicialmente visível e em branco) */
+}
+
+.card .back {
+    transform: rotateY(180deg);      /* Gira o verso da carta */
+    background-color: #fff;          /* Cor do lado com o conteúdo (imagem ou palavra) */
+    border: 1px solid #ccc;          /* Borda do verso da carta */
+}
+
+.card img {
+    max-width: 100%;                 /* Faz com que a imagem ocupe toda a largura disponível */
+    border-radius: 4px;              /* Arredonda os cantos da imagem */
+}
+
+/* Estilo do feedback */
+#feedback {
+    background-color: #28a745;       /* Cor de fundo verde para indicar sucesso */
+    color: white;                    /* Cor do texto */
+    padding: 10px 20px;              /* Espaçamento interno */
+    border-radius: 25px;             /* Arredonda as bordas para parecer um balão */
+    font-size: 24px;                 /* Tamanho da fonte do feedback */
+    margin: 10px auto;               /* Espaçamento em torno do feedback */
+    text-align: center;              /* Centraliza o texto */
+    animation: fadeInOut 2s ease-in-out forwards, bounce 0.5s 1s; /* Animações para o feedback */
+    display: none;                   /* Inicialmente oculto */
+    width: auto;                     /* Largura automática */
+    max-width: 300px;                /* Define um tamanho máximo para o balão */
+    white-space: nowrap;             /* Impedir que o texto quebre */
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2); /* Sombra para dar efeito de balão */
+}
+
+/* Animação de fade in e fade out para o feedback */
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;                  /* Transparência no início */
+    }
+    20% {
+        opacity: 1;                  /* Totalmente visível */
+    }
+    80% {
+        opacity: 1;                  /* Mantém visível por um tempo */
+    }
+    100% {
+        opacity: 0;                  /* Transparência no final */
+    }
+}
+
+/* Animação de bounce para dar mais ênfase */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);    /* Posição inicial e final */
+    }
+    40% {
+        transform: translateY(-30px); /* Movimento para cima */
+    }
+    60% {
+        transform: translateY(-15px); /* Movimento para baixo */
+    }
+}
+
+/* Estilo do resultado */
+#result {
+    font-size: 18px;                 /* Tamanho da fonte para o resultado */
+    margin-top: 15px;                /* Espaçamento acima do resultado */
+    text-align: center;              /* Centraliza o texto */
+}
+
+/* Estilo do jogo de ditado */
+#spelling-game {
+    max-width: 400px;                /* Largura máxima do container do jogo de ditado */
+    margin: 20px auto;               /* Centraliza o container e define a margem */
+    text-align: center;              /* Centraliza o texto */
+}
+
+#spelling-game h3 {
+    font-size: 20px;                 /* Tamanho da fonte do título */
+    margin-bottom: 15px;             /* Espaçamento abaixo do título */
+}
+
+#spelling-game p {
+    font-size: 18px;                 /* Tamanho da fonte do parágrafo */
+    margin-bottom: 15px;             /* Espaçamento abaixo do parágrafo */
+}
+
+#spelling-game input[type="text"] {
+    width: 100%;                     /* Largura total do input */
+    padding: 10px;                   /* Preenchimento interno do input */
+    margin-bottom: 15px;             /* Espaçamento abaixo do input */
+    font-size: 16px;                 /* Tamanho da fonte do input */
+    border: 1px solid #ccc;          /* Borda do input */
+    border-radius: 4px;              /* Arredonda as bordas do input */
+}
+
+#spelling-game button {
+    padding: 10px 20px;              /* Preenchimento interno do botão */
+    font-size: 16px;                 /* Tamanho da fonte do botão */
+    color: #fff;                     /* Cor do texto do botão */
+    background-color: #333;          /* Cor de fundo do botão */
+    border: none;                    /* Remove a borda padrão do botão */
+    border-radius: 4px;              /* Arredonda as bordas do botão */
+    cursor: pointer;                 /* Mostra o cursor como uma mão ao passar sobre o botão */
+}
+
+#spelling-game button:hover {
+    background-color: #555;          /* Muda a cor do fundo ao passar o mouse sobre o botão */
+}
+
+#result {
+    font-size: 18px;                 /* Tamanho da fonte do resultado */
+    margin-top: 15px;                /* Espaçamento acima do resultado */
+}
+
+/* Estilo da página de sucesso */
+.page-sucesso {
+    display: flex;                   /* Usa flexbox para o layout */
+    flex-direction: column;          /* Organiza o conteúdo em coluna */
+    align-items: center;             /* Centraliza o conteúdo horizontalmente */
+    justify-content: center;         /* Centraliza o conteúdo verticalmente */
+    height: 80vh;                    /* Ocupa a maior parte da altura da tela */
+    text-align: center;              /* Centraliza o texto */
+    background-color: #f9f9f9;       /* Fundo levemente cinza */
+    padding: 20px;                   /* Preenchimento interno */
+    border-radius: 8px;              /* Arredonda as bordas do container */
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra ao redor do container */
+}
+
+.page-sucesso h2 {
+    font-size: 36px;                 /* Tamanho da fonte do título */
+    color: #28a745;                  /* Verde para representar sucesso */
+    margin-bottom: 20px;             /* Espaçamento abaixo do título */
+    animation: pop-in 0.5s ease-in-out; /* Animação pop-in para o título */
+}
+
+.page-sucesso p {
+    font-size: 18px;                 /* Tamanho da fonte do parágrafo */
+    color: #555;                     /* Cor do texto */
+    margin-bottom: 20px;             /* Espaçamento abaixo do parágrafo */
+}
+
+.page-sucesso .btn {
+    padding: 10px 20px;              /* Preenchimento interno do botão */
+    font-size: 16px;                 /* Tamanho da fonte do botão */
+    color: #fff;                     /* Cor do texto do botão */
+    background-color: #333;          /* Cor de fundo do botão */
+    border: none;                    /* Remove a borda padrão do botão */
+    border-radius: 4px;              /* Arredonda as bordas do botão */
+    text-decoration: none;           /* Remove sublinhado do link */
+    cursor: pointer;                 /* Mostra o cursor como uma mão ao passar sobre o botão */
+    transition: background-color 0.3s; /* Transição suave da cor de fundo */
+}
+
+.page-sucesso .btn:hover {
+    background-color: #555;          /* Muda a cor de fundo ao passar o mouse sobre o botão */
+}
+
+/* Animação pop-in para dar efeito ao título */
+@keyframes pop-in {
+    0% {
+        transform: scale(0.5);       /* Inicia com o título reduzido e transparente */
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);         /* Termina com o título em tamanho normal e opaco */
+        opacity: 1;
+    }
+}
+
+/* Estilos para a página de criação de palavras */
+main {
+    max-width: 500px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+main h2 {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+form div {
+    margin-bottom: 15px;
+}
+
+form label {
+    display: block;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+form button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #28a745;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background-color: #218838;
+}
+
+/* Animação para feedback visual */
+form input[type="text"]:focus {
+    border-color: #80bdff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+}
+
+/* ------------------  */
+.input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+#add-word {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+#add-word:hover {
+    background-color: #218838;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos Responsivos */
+
+/* Estilos para telas pequenas, como smartphones */
+@media (max-width: 600px) {
+    .page-sucesso {
+        text-align: center;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    .btn {
+        display: block;
+        width: 100%;
+        margin: 10px 0;
+        padding: 15px;
+        font-size: 1em;
+    }
+
+    #spelling-game {
+        margin-top: 20px;
+    }
+
+    #spelling-game form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #spelling-game input[type="text"], #spelling-game input[type="hidden"] {
+        width: 90%;
+        padding: 10px;
+        margin-bottom: 10px;
+        font-size: 1em;
+    }
+
+    #speak-btn, #speak-answer-btn {
+        width: 90%;
+        padding: 15px;
+        font-size: 1em;
+        margin-bottom: 10px;
+    }
+
+    button {
+        width: 90%;
+        padding: 15px;
+        font-size: 1em;
+    }
+
+    #result {
+        margin-top: 20px;
+        font-size: 1.2em;
+    }
+}
+
+/* Estilos para tablets */
+@media (min-width: 601px) and (max-width: 1024px) {
+    h2 {
+        font-size: 1.75em;
+    }
+
+    .btn {
+        font-size: 1.1em;
+    }
+
+    #spelling-game {
+        margin-top: 30px;
+    }
+
+    #spelling-game form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #spelling-game input[type="text"], #spelling-game input[type="hidden"] {
+        width: 80%;
+        padding: 12px;
+        margin-bottom: 15px;
+        font-size: 1.1em;
+    }
+
+    #speak-btn, #speak-answer-btn {
+        width: 80%;
+        padding: 15px;
+        font-size: 1.1em;
+        margin-bottom: 15px;
+    }
+
+    button {
+        width: 80%;
+        padding: 15px;
+        font-size: 1.1em;
+    }
+
+    #result {
+        margin-top: 25px;
+        font-size: 1.4em;
+    }
+}
+
+/* Estilos para telas maiores (Desktop) */
+@media (min-width: 1025px) {
+    #spelling-game {
+        margin-top: 40px;
+    }
+
+    #spelling-game form {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #spelling-game input[type="text"], #spelling-game input[type="hidden"] {
+        width: 100%;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        margin-right: 10px;
+    }
+
+    #speak-btn, #speak-answer-btn {
+        width: 60%;
+        padding: 15px;
+        font-size: 1.2em;
+        margin-bottom: 20px;
+    }
+
+    button {
+        width: 60%;
+        padding: 15px;
+        font-size: 1.2em;
+    }
+
+    #result {
+        margin-top: 30px;
+        font-size: 1.6em;
+    }
+}
+
+
+@media (max-width: 378px) {
+    
+    main {
+        margin: 0;
+    }
+
+    main h2{
+      margin-top: 0; 
+      font-size: 20px; 
+    }
+
+    .card{
+        width: 80px;
+        height: 120px;
+    }
+
+    #spelling-game h3{
+        font-size: 16px;
+    }
+
+    p {
+        font-size: 12px;
+    }
+
+
+
+    #spelling-game input[type="text"], #spelling-game input[type="hidden"] {
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    .button  {
+        width: 100% !important;
+    }
+
+    #speak-btn{
+        width: 100%;
+    }     
+
+
+
+
+    /* -------------- Header */
+
+    header h1{
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+
+    header nav a{
+        font-size: 14px;
+        border-radius: 10px;
+        background-color: #0056b3;
+        padding: 6px;
+        cursor: pointer;
+        margin-top: 0.7rem;
+        margin-bottom: 0.7rem;
+    }
+
+    header nav{
+
+        margin-top: 0.7rem;
+        margin-bottom: 0.7rem;
+    }
+
+    .nav2 {
+        font-size: 14px;
+        font-family: Arial, Helvetica, sans-serif;
+        margin-right: 5px;
+        cursor: pointer;
+        margin-top: 0.7rem;
+        margin-bottom: 0.7rem;
+    }
+
+    .nav2 a {
+        border-radius: 10px;
+        background-color: #0056b3;
+        padding: 6px;
+        cursor: pointer;
+    }
+
+
+
+    .page-sucesso .btn {
+        padding: 10PX;
+    }
+
+    .btn {
+        width: 80%;
+    }
+
+    #spelling-game button {
+        margin-bottom: 15px;
+    }
+}

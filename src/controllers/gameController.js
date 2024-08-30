@@ -22,7 +22,7 @@ const gameController = {
             ])).sort(() => 0.5 - Math.random());
 
             res.render('game', {
-                title: 'Jogo de Associação - Match Game',
+                title: 'Match Game',
                 cards: gameCards,
             });
         } catch (error) {
@@ -33,7 +33,7 @@ const gameController = {
 
     pageSucesso: (req, res) => {
         res.render('pageSucesso', {
-            title: 'Sucesso',
+            title: 'Success',
         });
     },
 };

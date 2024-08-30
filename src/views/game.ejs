@@ -1,28 +1,85 @@
 <%- include("./partials/head") %>
+<%- include("./partials/headAntigo") %>
 
 <body>
-    <%- include("./partials/header") %>
 
-    <main>
-        <h2><%= title %></h2>
-        <!-- Popup de feedback logo abaixo do título -->
-        <div id="feedback">Acertou!</div>
-        <div id="game-board">
-            <% cards.forEach(card => { %>
-                <div class="card" data-word="<%= card.word %>" data-isimage="<%= card.isImage %>">
-                    <div class="front"></div> <!-- Frente da carta (inicialmente visível e em branco) -->
-                    <div class="back">
-                        <% if (card.isImage) { %>
-                            <img src="<%= card.imageUrl %>" alt="<%= card.word %>">
-                        <% } else { %>
-                            <p><%= card.word %></p>
-                        <% } %>
-                    </div>
-                </div>
-            <% }) %>
+
+
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+    <%- include("./partials/headerLado") %>
+
+
+        <!-- Layout container -->
+        <div class="layout-page" style="background-color: #28243d;">
+            <!-- Navbar -->
+  
+    <%- include("./partials/headerCima") %>
+
+
+
+
+
+
+<style>
+    .container-p-y:not([class^=pt-]):not([class*=" pt-"]) {
+    padding-top: 0.1rem !important;
+}
+</style>
+    
+          <!-- / Navbar -->
+
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
+            <!-- Content -->
+
+            <div class="container-xxl flex-grow-1 container-p-y" style="background-color: #28243d; margin-top: 0 !important;">
+              <div class="app-academy" style="background-color: #312d4b; padding: 1rem; border-radius: 10px;" >
+ 
+                <h4 class="mb-0" ><%= title %></h4>
+                <p class="mb-0">Turn the cards over until you find the pairs</p>
+                        <h2></h2>
+                        <!-- Popup de feedback logo abaixo do título -->
+                        <div id="feedback">got it right!</div>
+                        <div id="game-board">
+                            <% cards.forEach(card => { %>
+                                <div class="card" style="color: black; border: 0 !important;" data-word="<%= card.word %>" data-isimage="<%= card.isImage %>">
+                                    <div class="front"></div> <!-- Frente da carta (inicialmente visível e em branco) -->
+                                    <div class="back" style="border: 0 !important;">
+                                        <% if (card.isImage) { %>
+                                            <img src="<%= card.imageUrl %>" alt="<%= card.word %>">
+                                        <% } else { %>
+                                            <p style="font-size: 20px;"><%= card.word %></p>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            <% }) %>
+                        </div>
+                
+                
+  
+
+              </div>
+            </div>
+            <!-- / Content -->
+
+
+            <div class="content-backdrop fade"></div>
+          </div>
+          <!-- Content wrapper -->
         </div>
-    </main>
+        <!-- / Layout page -->
+      </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+
+      <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+      <div class="drag-target"></div>
+    </div>
 
     <script src="../js/game.js"></script>
+    <%- include("./partials/linkFooter") %>
+
 </body>
 </html>
