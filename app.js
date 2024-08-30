@@ -34,6 +34,7 @@ const calendarRoutes = require('./src/routes/calendarRoutes');
 app.use('/', gameRoutes);
 app.use('/', spellingRoutes);
 app.use('/', indexRoutes); // Certifique-se que existe
+app.use('/', spellingAudioRoutes); 
 app.use('/', calendarRoutes);
 
 // Iniciar o servidor
